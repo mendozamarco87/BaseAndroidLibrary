@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Base</string>
+    <string name="data_data_">/data/data/</string>
+    <string name="alert">Aviso</string>
+    <string name="ok">Aceptar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="internet_error_info">En este momento no cuenta con conexión a internet, intente más tarde</string>
+    <string name="connection_error_info">No es posible conectarse con el servicio, intente más tarde.</string>
+    <string name="alphanumeric_only">0123456789abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ</string>
+    <string name="alphanumeric_and_space">0123456789 abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ</string>
+    <string name="alphabetical_and_space">abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ ÁáÉéÍíÓóÚúÑñÜü</string>
+    <string name="especial_characters">ÁáÉéÍíÓóÚúÑñÜü</string>
+    <string name="normal_characters">AaEeIiOoUuNnUu</string>
+    <string name="permission_rationale_message">Para el correcto funcionamiento de la aplicación es necesario aceptar los permisos que se solicitan a continuación</string>
+</resources>

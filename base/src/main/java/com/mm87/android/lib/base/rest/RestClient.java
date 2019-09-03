@@ -91,13 +91,13 @@ public abstract class RestClient extends JsonHttpResponseHandler {
         }
     }
 
-    protected void onErrorLogico(String codRespuesta, String error, String datos) {
+    public void onError(String code, String error, String data) {
         if (iRestClientManager != null) {
-            iRestClientManager.onError(this, codRespuesta, error);
+            iRestClientManager.onError(this, code, error, data);
         }
     }
 
-    protected void callToPostWithParameterMetods(JSONObject jsonObject) {
+    protected void httpPostWithJson(JSONObject jsonObject) {
         try {
             StringEntity stringEntity = new StringEntity(jsonObject.toString(), "UTF-8");
             AsyncHttpClientManager.allowCircularRedirects();
@@ -109,40 +109,71 @@ public abstract class RestClient extends JsonHttpResponseHandler {
         }
     }
 
-    protected void callToPostWithParameterMetodsAndSpinner(JSONObject jsonObject, CharSequence mensaje) {
-        callToPostWithParameterMetods(jsonObject);
-        if (iRestClientManager != null) {
-            iRestClientManager.showProgressDialog(this, mensaje);
+    public void callPostWithJson(JSONObject jsonObject) {
+        if (checkInternet()) {
+            httpPostWithJson(jsonObject);
         }
     }
 
-    public void callGet() {
+    public void callPostWithJsonAndShowProgress(JSONObject jsonObject, CharSequence message) {
+        if (checkInternet()) {
+            httpPostWithJson(jsonObject);
+            if (iRestClientManager != null) {
+                iRestClientManager.showProgressDialog(this, message);
+            }
+        }
+    }
+
+    protected void httpGet() {
         AsyncHttpClientManager.allowCircularRedirects();
         AsyncHttpClientManager.setTimeOut(getTimeOut());
         AsyncHttpClientManager.get(getURL(), getMethod(), this);
     }
 
-    public void callGetConSpinner(CharSequence mensaje) {
-
-        callGet();
-        if (iRestClientManager != null) {
-            iRestClientManager.showProgressDialog(this, mensaje);
+    public void callGet() {
+        if (checkInternet()) {
+            httpGet();
         }
     }
 
-    protected void callToPostWithutParameterMetods() {
+    public void callGetAndShowProgress(CharSequence message) {
+        if (checkInternet()) {
+            httpGet();
+            if (iRestClientManager != null) {
+                iRestClientManager.showProgressDialog(this, message);
+            }
+        }
+    }
+
+    protected void httpPost() {
         AsyncHttpClientManager.allowCircularRedirects();
         AsyncHttpClientManager.setTimeOut(getTimeOut());
         AsyncHttpClientManager.post(null, getURL(), getMethod(), null, null,
                 "application/json", this);
     }
 
-    protected void callToPostWithoutParameterMethodsAndProgress(CharSequence mensaje) {
-        callToPostWithutParameterMetods();
-        if (iRestClientManager != null) {
-            iRestClientManager.showProgressDialog(this, mensaje);
+    public void callPost() {
+        if (checkInternet()) {
+            httpPost();
         }
     }
 
+    public void callPostAndShowProgress(CharSequence message) {
+        if (checkInternet()) {
+            httpPost();
+            if (iRestClientManager != null) {
+                iRestClientManager.showProgressDialog(this, message);
+            }
+        }
+    }
 
+    protected boolean checkInternet() {
+        if (iRestClientManager == null) return true;
+        if (iRestClientManager.getInternetState()) {
+            return true;
+        } else {
+            iRestClientManager.onFailureInternet(this);
+            return false;
+        }
+    }
 }

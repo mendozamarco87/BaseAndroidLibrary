@@ -204,7 +204,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onError(RestClient restClient, String code, String message) {
+    public void onError(RestClient restClient, String code, String message, String data) {
         showAlert(null, getString(R.string.alert), message);
     }
 }

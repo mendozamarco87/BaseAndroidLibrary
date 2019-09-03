@@ -10,7 +10,7 @@ public interface IRestClientManager {
 
 	void onFailure(RestClient restClient, int statusCode, String message);
 
-	void onError(RestClient restClient, String code, String message);
+	void onError(RestClient restClient, String code, String message, String data);
 
 	void showProgressDialog(RestClient restClient, CharSequence message);
 }

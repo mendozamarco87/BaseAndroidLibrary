@@ -177,7 +177,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment, IR
     }
 
     @Override
-    public void onError(RestClient restClient, String code, String message) {
+    public void onError(RestClient restClient, String code, String message, String data) {
         showAlert(null, getString(R.string.alert), message);
     }
 }
